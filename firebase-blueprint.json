@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "article": {
+      "title": "Article",
+      "description": "A blog post published by the newsletter authors.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the article." },
+        "content": { "type": "string", "description": "The markdown content of the article." },
+        "imageUrl": { "type": "string", "description": "URL of the cover image." },
+        "author": { "type": "string", "description": "Name of the author (Alex or Filippo)." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the article was published." },
+        "authorUid": { "type": "string", "description": "The Firebase UID of the author." }
+      },
+      "required": ["title", "content", "author", "createdAt", "authorUid"]
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "A user with administrative privileges to publish articles.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "description": "The email of the admin." },
+        "role": { "type": "string", "enum": ["admin"], "description": "The role of the user." }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/articles/{articleId}": {
+      "schema": "article",
+      "description": "Collection of blog articles."
+    },
+    "/admins/{adminId}": {
+      "schema": "admin",
+      "description": "Collection of authorized administrators."
+    }
+  }
+}
